@@ -153,8 +153,8 @@ class HBNBCommand(cmd.Cmd):
             "Place": Place,
             "Review": Review,
         }
-        # create a dictionary of params
-        param_dict = {}
+
+        # test if class_name provided
         try:
             cls_name = arg.split()[0]
         except IndexError:
@@ -162,6 +162,8 @@ class HBNBCommand(cmd.Cmd):
             return False
 
         if cls_name.istitle() and cls_name in _Classes:
+             # create a dictionary to store parameters
+            param_dict = {}
             if len(arg.split()) > 1:
                 for arg in arg.split()[1:]:
                     if "=" in arg:
@@ -173,7 +175,7 @@ class HBNBCommand(cmd.Cmd):
                             elif "." in parts[1]:
                                 parts[1] = float(parts[1])
                             else:
-                                parts[1] = parts[1].replace("_", " ")
+                                parts[1] = parts[1].replace("_", " ")[1:-1]
                         except:
                             pass
                         param_dict[parts[0]] = parts[1]
@@ -184,7 +186,6 @@ class HBNBCommand(cmd.Cmd):
             )
             instance.save()
             print(instance.id)
-
         else:
             print("** class name doesn't exist")
 
