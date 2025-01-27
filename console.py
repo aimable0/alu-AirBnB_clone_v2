@@ -178,14 +178,13 @@ class HBNBCommand(cmd.Cmd):
                             pass
                         param_dict[parts[0]] = parts[1]
 
-                # class creation
-                instance = _Classes[cls_name](**param_dict)
-                instance.save()
-                print(instance.id)
-            else:
-                instance = _Classes[cls_name]()
-                instance.save()
-                print(instance.id)
+            # class creation
+            instance = (
+                _Classes[cls_name](**param_dict) if param_dict else _Classes[cls_name]()
+            )
+            instance.save()
+            print(instance.id)
+
         else:
             print("** class name doesn't exist")
 
