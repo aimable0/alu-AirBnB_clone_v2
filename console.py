@@ -184,6 +184,7 @@ class HBNBCommand(cmd.Cmd):
                 print(instance.id)
             else:
                 instance = _Classes[cls_name]()
+                instance.save()
                 print(instance.id)
         else:
             print("** class name doesn't exist")
