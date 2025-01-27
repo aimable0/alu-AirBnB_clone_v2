@@ -162,22 +162,19 @@ class HBNBCommand(cmd.Cmd):
             return False
 
         if cls_name.istitle() and cls_name in _Classes:
-             # create a dictionary to store parameters
+            # create a dictionary to store parameters
             param_dict = {}
             if len(arg.split()) > 1:
                 for arg in arg.split()[1:]:
                     if "=" in arg:
                         parts = arg.split("=")
                         try:
-                            # Try type conversion.
-                            if parts[1].isnumeric():
-                                parts[1] = int(parts[1])
-                            elif "." in parts[1]:
+                            parts[1] = int(parts[1])
+                        except ValueError:
+                            try:
                                 parts[1] = float(parts[1])
-                            else:
+                            except ValueError:
                                 parts[1] = parts[1].replace("_", " ")[1:-1]
-                        except:
-                            pass
                         param_dict[parts[0]] = parts[1]
 
             # class creation
