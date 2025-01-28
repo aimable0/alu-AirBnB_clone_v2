@@ -67,3 +67,10 @@ class FileStorage:
             if obj_key in self.__objects:
                 del self.__objects[obj_key]
                 self.save()
+
+    def all(self, cls=None):
+        """returns the dictionary __objects"""
+        if cls is not None:
+            # filter out objects of a certain type of class and return them.
+            return {key: obj for key, obj in self.__objects.items() if key.startswith(cls)}
+        return self.__objects
