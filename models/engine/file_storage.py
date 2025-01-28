@@ -26,13 +26,6 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
-    def all(self, cls=None):
-        """returns the dictionary __objects"""
-        if cls is not None:
-            # filter out objects of a certain type of class and return them.
-            return {key: obj for key, obj in self.__objects.items() if key.startswith(cls)}
-        return self.__objects
-
     def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id"""
         key = f'{obj.to_dict()["__class__"]}.{obj.to_dict()["id"]}'
@@ -66,7 +59,7 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
-        """delete an object and save changes to objects and json file"""
+        """delete an object and save changes to __objects and json file"""
         if obj is not None:
             # construct the key for the object to delete
             obj_key = f"{obj.__class__.__name__}.{obj.id}"
