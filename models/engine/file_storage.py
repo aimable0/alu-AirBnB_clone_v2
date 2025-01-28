@@ -72,5 +72,8 @@ class FileStorage:
         """returns the dictionary __objects"""
         if cls is not None:
             # filter out objects of a certain type of class and return them.
-            return {key: obj for key, obj in self.__objects.items() if key.startswith(cls)}
+            return {
+                key: obj
+                for key, obj in self.__objects.items()
+                if cls.__name__ == obj.__class__.__name__}
         return self.__objects
