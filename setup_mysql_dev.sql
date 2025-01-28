@@ -1,3 +1,5 @@
+-- This is a script that create a new database and user.
+
 CREATE DATABASE hbnb_dev_db;
 CREATE USER 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
 GRANT ALL PRIVILEGES ON hbnb_dev_db.* TO 'hbnb_dev'@'localhost';
