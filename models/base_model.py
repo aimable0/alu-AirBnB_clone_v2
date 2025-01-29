@@ -1,8 +1,14 @@
 #!/usr/bin/python3
-
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy.orm import declarative_base
 from uuid import uuid4
 from datetime import datetime
 import models
+
+
+# sqlalchemy
+
+Base = declarative_base()
 
 
 class BaseModel:
@@ -25,6 +31,11 @@ class BaseModel:
         to_dict(): Converts the instance to a dictionary including all
                    instance attributes.
     """
+
+    # class attributes
+    id = Column(String(60), primary_key=True, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
 
     # public instances
     def __init__(self, *args, **kwargs):
@@ -55,7 +66,7 @@ class BaseModel:
                     elif key == "created_at":
                         setattr(self, key, datetime.fromisoformat(value))
                     else:
-                        setattr(self, key, value)
+                        setattr(self, key, value)  # some updates..
 
     def __str__(self):
         """
@@ -114,4 +125,12 @@ class BaseModel:
         instance_dict["updated_at"] = self.updated_at.isoformat()
         instance_dict["created_at"] = self.created_at.isoformat()
         instance_dict["__class__"] = self.__class__.__name__
+
+        # updates to remove _sa_instance_state if exists from
+        if "_sa_instance_state" in instance_dict.keys():
+            del instance_dict["_sa_instance_state"]
         return instance_dict
+
+    def delete(self):
+        """Delete the current instance from the storage"""
+        models.storage.delete(self)

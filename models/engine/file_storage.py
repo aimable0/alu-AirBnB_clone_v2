@@ -75,5 +75,12 @@ class FileStorage:
             return {
                 key: obj
                 for key, obj in self.__objects.items()
-                if cls.__name__ == obj.__class__.__name__}
+                if cls.__name__ == obj.__class__.__name__
+            }
         return self.__objects
+
+    @property
+    def cities(self):
+        """returns the list of city instances with state_id = (current)self.state_id""" # commente exced 79
+        return []
+    
