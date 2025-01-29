@@ -10,7 +10,7 @@ class City(BaseModel, Base):
 
     __tablename__ = "cities"
     name = Column(String(128), nullable=False)
-    state_id = Column(String(60), ForeignKey("states.state_id"), nullable=False) # still some fix to be done
+    state_id = Column(String(60), ForeignKey("states.id"), nullable=False) # still some fix to be done
     # some instruction about the relationship (city - state)... to be revised
 
     def __init__(self, name, state_id):
