@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Database model"""
 import os
-from dotenv import load_dotenv, find_dotenv
+# from dotenv import load_dotenv, find_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
@@ -12,8 +12,8 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
-env_path = find_dotenv(".env")
-load_dotenv(env_path)
+# env_path = find_dotenv(".env")
+# load_dotenv(env_path)
 
 
 class DBStorage:
