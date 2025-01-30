@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Database model"""
 import os
-# from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv, find_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
@@ -12,8 +12,8 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
-# env_path = find_dotenv(".env")
-# load_dotenv(env_path)
+env_path = find_dotenv(".env")
+load_dotenv(env_path)
 
 
 class DBStorage:
@@ -30,7 +30,7 @@ class DBStorage:
         HBNB_MYSQL_PWD = os.getenv("HBNB_MYSQL_PWD")
         HBNB_ENV = os.getenv("HBNB_ENV")
 
-        db = f"mysql+mysqldb://{HBNB_MYSQL_USER}:{HBNB_MYSQL_PWD}@{HBNB_MYSQL_HOST}/{HBNB_MYSQL_DB}"
+        db = f"mysql+pymysql://{HBNB_MYSQL_USER}:{HBNB_MYSQL_PWD}@{HBNB_MYSQL_HOST}/{HBNB_MYSQL_DB}"
         self.__engine = create_engine(db, pool_pre_ping=True)
 
         # drop all tables if HBNB_ENV == test
