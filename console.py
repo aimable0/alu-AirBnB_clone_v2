@@ -41,15 +41,15 @@ except FileNotFoundError:
     pass  # No history file found, proceed silently
 
 # valid classes
-CLASSES = [
-    "BaseModel",
-    "User",
-    "State",
-    "City",
-    "Amenity",
-    "Place",
-    "Review",
-]
+CLASSES = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Place": Place,
+        "Review": Review,
+    }
 
 
 def inform_user_given_one_arg(arg):
@@ -66,7 +66,7 @@ def inform_user_given_one_arg(arg):
     """
     if arg == "":
         print("** class name missing **")
-    elif arg not in CLASSES:
+    elif arg not in CLASSES.keys():
         print("** class doesn't exist **")
     else:
         print("** instance id missing **")
@@ -83,7 +83,7 @@ def inform_user_given_two_arg(class_name):
         - "** class doesn't exist **" if the class name is invalid.
         - "** no instance found **" if the instance doesn't exist.
     """
-    if class_name not in CLASSES:
+    if class_name not in CLASSES.keys():
         print("** class doesn't exist **")
     else:
         print("** no instance found **")
@@ -98,7 +98,10 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
-    classes = CLASSES.copy()
+    # dict of Classes
+    _Classes = CLASSES.copy()
+    # list of classes
+    classes = CLASSES.keys()
 
     def do_quit(self, arg):
         """
@@ -144,15 +147,6 @@ class HBNBCommand(cmd.Cmd):
         Usage:
             # to be edited
         """
-        _Classes = {
-            "BaseModel": BaseModel,
-            "User": User,
-            "State": State,
-            "City": City,
-            "Amenity": Amenity,
-            "Place": Place,
-            "Review": Review,
-        }
 
         # test if class_name provided
         try:
@@ -161,7 +155,7 @@ class HBNBCommand(cmd.Cmd):
             print("** Class name missing **")
             return False
 
-        if cls_name.istitle() and cls_name in _Classes:
+        if cls_name.istitle() and cls_name in self._Classes.keys():
             # create a dictionary to store parameters
             param_dict = {}
             if len(arg.split()) > 1:
@@ -179,7 +173,9 @@ class HBNBCommand(cmd.Cmd):
 
             # class creation
             instance = (
-                _Classes[cls_name](**param_dict) if param_dict else _Classes[cls_name]()
+                self._Classes[cls_name](**param_dict)
+                if param_dict
+                else self._Classes[cls_name]()
             )
             instance.save()
             print(instance.id)
@@ -238,11 +234,13 @@ class HBNBCommand(cmd.Cmd):
             arg (str): The class name (optional).
 
         Usage:
-            all [BaseModel, ]
+            all [BaseModel, etc]
         """
-        # classes = ["BaseModel", "User"]
         if arg in self.__class__.classes or arg == "":
-            all_objs = storage.all()
+            if arg:
+                all_objs = storage.all(self._Classes[arg])
+            else:
+                all_objs = storage.all()
             all_list = []
             for key in all_objs.keys():
                 if arg in self.__class__.classes:
