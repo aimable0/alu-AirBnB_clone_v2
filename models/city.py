@@ -11,7 +11,6 @@ class City(BaseModel, Base):
     name = Column(String(128), nullable=False)
     state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
 
-    def __init__(self, name, state_id):
-        self.name = name
-        self.state_id = state_id
-
+    def __init__(self, *args, **kwargs):
+        """Initialize a City Instance"""
+        super().__init__(*args, **kwargs)

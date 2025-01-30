@@ -23,8 +23,7 @@ class DBStorage:
     __session = None
 
     def __init__(self):
-        # env variables
-        HBNB_TYPE_STORAGE = os.getenv("HBNB_TYPE_STORAGE")
+        """Instantiate a DBStorage object"""
         HBNB_MYSQL_DB = os.getenv("HBNB_MYSQL_DB")
         HBNB_MYSQL_HOST = os.getenv("HBNB_MYSQL_HOST")
         HBNB_MYSQL_USER = os.getenv("HBNB_MYSQL_USER")
@@ -81,6 +80,12 @@ class DBStorage:
     def reload(self):
         """create all tables in the database"""
         # all classe that inherit from base must be imported first
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
         Base.metadata.create_all(bind=self.__engine)
         session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
