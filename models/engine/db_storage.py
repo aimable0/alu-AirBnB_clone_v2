@@ -46,7 +46,7 @@ class DBStorage:
             }
             return objs_dict
         else:
-            classes = [State, City]
+            classes = [State, City, User]
             objs_dict = {}
             for item in classes:
                 for obj in self.__session.query(item):
