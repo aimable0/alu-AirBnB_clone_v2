@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Database model"""
 import os
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
@@ -47,7 +46,7 @@ class DBStorage:
             }
             return objs_dict
         else:
-            classes = [State, City, User]
+            classes = [State, City, User, Place]
             objs_dict = {}
             for item in classes:
                 for obj in self.__session.query(item):
