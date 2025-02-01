@@ -79,13 +79,6 @@ class DBStorage:
 
     def reload(self):
         """create all tables in the database"""
-        # all classe that inherit from base must be imported first
-        from models.user import User
-        from models.state import State
-        from models.city import City
-        from models.amenity import Amenity
-        from models.place import Place
-        from models.review import Review
 
         Base.metadata.create_all(bind=self.__engine)
         session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)

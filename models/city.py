@@ -15,6 +15,7 @@ class City(BaseModel, Base):
     places = relationship(
         "Place", back_populates="cities", cascade="all, delete-orphan"
     )
+    state = relationship('State', back_populates='cities')
 
     def __init__(self, *args, **kwargs):
         """Initialize a City Instance"""
