@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
 from models.user import User
 from models.state import State
-from models.city import City
+from models.city import Review
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
@@ -46,7 +46,7 @@ class DBStorage:
             }
             return objs_dict
         else:
-            classes = [State, City, User, Place]
+            classes = [State, Review, User, Place]
             objs_dict = {}
             for item in classes:
                 for obj in self.__session.query(item):
