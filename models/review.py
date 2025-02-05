@@ -5,6 +5,7 @@ from sqlalchemy import String, Column, ForeignKey
 from sqlalchemy.orm import relationship
 from os import getenv
 
+
 class Review(BaseModel, Base):
     """Review class to store review information"""
 

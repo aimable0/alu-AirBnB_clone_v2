@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, Integer, ForeignKey, Float
+from sqlalchemy import Column, String, Integer, ForeignKey, Float, Table
 from sqlalchemy.orm import relationship
 from os import getenv
+
 
 class Place(BaseModel, Base):
     """A place to stay"""
@@ -26,6 +27,30 @@ class Place(BaseModel, Base):
         reviews = relationship(
             "Review", back_populates="place", cascade="all, delete-orphan"
         )
+        place_amenity = Table(
+            "place_amenity",
+            Base.metadata,
+            Column(
+                "place_id",
+                String(60),
+                ForeignKey("places.id"),
+                primary_key=True,
+                nullable=False,
+            ),
+            Column(
+                "amenity_id",
+                String(60),
+                ForeignKey("amenities.id"),
+                primary_key=True,
+                nullable=False,
+            ),
+        )
+        amenities = relationship(
+            "Amenity",
+            secondary=place_amenity,
+            back_populates="place_amenities",
+            viewonly=False,
+        )
     else:
         # in case of file_storage
         name = ""
@@ -38,7 +63,7 @@ class Place(BaseModel, Base):
         price_by_night = 0
         latitude = 0.0
         longitude = 0.0
-        amenity_ids = []  # it will be the list of Amenity.id later
+        amenity_ids = []  # list of Amenity.id later
 
     def __init__(self, *args, **kwargs):
         """initialize an instance of place"""
@@ -57,3 +82,21 @@ class Place(BaseModel, Base):
                 if obj.place_id == self.id:
                     all_reviews.append(obj)
             return all_reviews
+
+        @property
+        def amenities(self):
+            from models.amenity import Amenity
+            from models import storage
+
+            all_amenities = []
+            for obj in storage.all(Amenity).values():
+                if obj.id in self.amenity_ids:
+                    all_amenities.append(obj)
+            return all_amenities
+
+        @amenities.setter
+        def amenities(self, obj):
+            from models.amenity import Amenity
+
+            if type(obj) == Amenity:
+                self.amenity_ids.append(obj.id)
