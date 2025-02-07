@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# This script contains command that sets up a web servers for the deployment of web_static
 
 # install nginx if not installed
 dpkg -l | grep nginx > /dev/null
