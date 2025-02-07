@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # install nginx if not installed
 dpkg -l | grep nginx > /dev/null
 if [ $? -eq 1 ]; then
