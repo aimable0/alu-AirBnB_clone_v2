@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
 Fabric script that generates tgz archives from the folder: web_static
+from the AirBnB Clone repo
 """
 
 from fabric import Connection, task
