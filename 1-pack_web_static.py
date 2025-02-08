@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-# creates an archive file and compresses folder into it.
+"""
+Fabric script that generates tgz archives from the folder: web_static
+"""
 
 from fabric import Connection, task
 import os
