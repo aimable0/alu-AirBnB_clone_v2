@@ -3,11 +3,15 @@
 
 from fabric import Connection, task
 import os
-import tarfile
+from fabric.api import local
 from datetime import datetime
 
+
 def do_pack():
-    """function that creates a .tgz archive from the contents of web_static"""
+    """This function creates a .tgz archive from the contents of web_static
+    on success:
+        - Returns the archive path
+    """
 
     # ensure versions exitst or create it
     os.makedirs("versions", exist_ok=True)
@@ -15,7 +19,5 @@ def do_pack():
     # creating a timestamp name
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     archive_name = f"versions/web_static_{timestamp}.tgz"
-
-    with tarfile.open(archive_name, "w:gz") as tar:
-        tar.add("web_static", arcname="web_static")
+    local(f"tar -cvzf {archive_name}")
     return archive_name
