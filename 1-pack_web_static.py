@@ -8,9 +8,17 @@ from datetime import datetime
 
 
 def do_pack():
-    """This function creates a .tgz archive from the contents of web_static
-    on success:
-        - Returns the archive path
+    """
+    Creates a compressed .tgz archive of the web_static folder.
+
+    - Ensures that the 'versions' directory exists.
+    - Generates a timestamp-based archive name in the format:
+      'web_static_<year><month><day><hour><minute><second>.tgz'.
+    - Uses the tar command to create the archive.
+
+    Returns:
+        str: The path to the created archive if successful.
+        None: If the archive creation fails.
     """
 
     # ensure versions exitst or create it
