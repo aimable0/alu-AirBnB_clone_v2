@@ -1,4 +1,4 @@
-#!usr/bin/python3
+#!/usr/bin/python3
 # creates an archive file and compresses folder into it.
 
 from fabric import Connection, task
