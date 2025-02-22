@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ a script that starts a Flask web application """
-from flask import Flask, abort
+from flask import Flask, abort, render_template
 from markupsafe import escape
 
 
@@ -34,6 +34,14 @@ def display_Python(text):
 def display_num(n):
     if n.isdigit():
         return f"{n} is a number"
+    else:
+        abort(404)
+
+
+@app.route('/number_template/<n>', strict_slashes=False)
+def display_HTML(n):
+    if n.isdigit():
+        return render_template('5-number.html', n=n)
     else:
         abort(404)
 
