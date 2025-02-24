@@ -29,8 +29,11 @@ def display_C(text):
     return "C " + text.replace("_", " ")
 
 
+# handling defaults:
+# passing defaults in the url
+@app.route("/python/", defaults={"text": "is cool"}, strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
-def display_python(text="is cool"):
+def display_python(text):
     """Handling /python/<text> links"""
     return "Python " + text.replace("_", " ")
 
