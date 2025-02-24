@@ -1,4 +1,5 @@
-#!/usr/bin/"""Script that starts a Flask web application."""
+#!/usr/bin/python3
+"""Script that starts a Flask web application."""
 from flask import Flask
 from markupsafe import escape
 
