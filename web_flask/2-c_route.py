@@ -1,10 +1,4 @@
-#!/usr/bin/python3
-"""Script that starts a Flask web application:
-    Routes:
-            /: display “Hello HBNB!”
-            /hbnb: display “HBNB”
-            /c/<text>: display “C ” followed by the value of the text variable (replace underscore _ symbols with a space )
-."""
+#!/usr/bin/"""Script that starts a Flask web application."""
 from flask import Flask
 from markupsafe import escape
 
