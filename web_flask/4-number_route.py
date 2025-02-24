@@ -25,18 +25,15 @@ def display_C(text):
 
 
 @app.route("/python/<text>", strict_slashes=False)
-def display_python(text="is cool"):
+def display_python(text):
     """Handling /python/<text> links"""
     return "Python " + text.replace("_", " ")
 
 
-@app.route("/number/<n>", strict_slashes=False)
+@app.route("/number/<int:n>", strict_slashes=False)
 def display_number(n):
     """handling /number/n routes"""
-    if type(n) is int:
-        return "{} is a number".format(n)
-    else:
-        return ""
+    return "{} is a number".format(n)
 
 
 if __name__ == "__main__":
