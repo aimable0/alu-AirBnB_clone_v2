@@ -33,7 +33,10 @@ def display_python(text="is cool"):
 @app.route("/number/<n>", strict_slashes=False)
 def display_number(n):
     """handling /number/n routes"""
-    return (str(n) + "is a number") if type(n) is int else ""
+    if type(n) is int:
+        return "{} is a number".format(n)
+    else:
+        return ""
 
 
 if __name__ == "__main__":
