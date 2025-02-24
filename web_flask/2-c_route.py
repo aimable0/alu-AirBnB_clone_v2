@@ -28,7 +28,7 @@ def hbnb():
 def display_C(text):
     """Handling /c/<text> route"""
     text_underscore_removed = text.replace("_", " ")
-    return f"C {text_underscore_removed}"
+    return "C {text_underscore_removed}".format(text_underscore_removed)
 
 
 if __name__ == "__main__":
