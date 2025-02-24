@@ -6,7 +6,6 @@
             /c/<text>: display “C ” followed by the value of the text variable (replace underscore _ symbols with a space )
 """
 from flask import Flask
-from markupsafe import escape
 
 
 app = Flask(__name__)
@@ -28,7 +27,7 @@ def hbnb():
 def display_C(text):
     """Handling /c/<text> route"""
     text_underscore_removed = text.replace("_", " ")
-    return "C {text_underscore_removed}".format(text_underscore_removed)
+    return f"C {text_underscore_removed}"
 
 
 if __name__ == "__main__":
