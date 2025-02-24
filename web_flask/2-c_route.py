@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""A script that starts a flask web application:
+"""Script that starts a Flask web application:
     Routes:
             /: display “Hello HBNB!”
             /hbnb: display “HBNB”
