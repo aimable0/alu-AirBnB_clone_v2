@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Script that starts a Flask web application:
+"""Script that starts a flask web application:
     Routes:
             /: display “Hello HBNB!”
             /hbnb: display “HBNB”
@@ -25,8 +25,10 @@ def hbnb():
 
 
 @app.route("/c/<text>", strict_slashes=False)
-def hello_c(text):
-    return "C " + text.replace("_", " ")
+def display_C(text):
+    """Handling /c/<text> route"""
+    text_underscore_removed = text.replace("_", " ")
+    return f"C {text_underscore_removed}"
 
 
 if __name__ == "__main__":
