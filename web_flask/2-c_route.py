@@ -19,16 +19,14 @@ def hello():
 
 
 @app.route("/hbnb", strict_slashes=False)
-def hello_hbnb():
+def hbnb():
     """Handling /hnbn route"""
     return "HBNB"
 
 
 @app.route("/c/<text>", strict_slashes=False)
 def hello_c(text):
-    """Handling /c/<text> route"""
-    text_underscore_removed = text.replace("_", " ")
-    return f"C {escape(text_underscore_removed)}"
+    return "C " + text.replace("_", " ")
 
 
 if __name__ == "__main__":
