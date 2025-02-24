@@ -30,7 +30,7 @@ def display_C(text):
 
 
 @app.route("/python/<text>", strict_slashes=False)
-def display_python(text):
+def display_python(text="is cool"):
     """Handling /python/<text> links"""
     return "Python " + text.replace("_", " ")
 
