@@ -1,10 +1,5 @@
 #!/usr/bin/python3
-"""Script that starts a flask web application:
-    Routes:
-            /: display “Hello HBNB!”
-            /hbnb: display “HBNB”
-            /c/<text>: display “C ” followed by the value of the text variable (replace underscore _ symbols with a space )
-"""
+"""Script that starts a flask web application"""
 from flask import Flask
 
 
@@ -29,16 +24,17 @@ def display_C(text):
     return "C " + text.replace("_", " ")
 
 
-
 @app.route("/python/<text>", strict_slashes=False)
 def display_python(text="is cool"):
     """Handling /python/<text> links"""
     return "Python " + text.replace("_", " ")
 
-app.route("/number/<n>", strict_slashes=False)
+
+@app.route("/number/<n>", strict_slashes=False)
 def display_number(n):
     """handling /number/n routes"""
     return (str(n) + "is a number") if type(n) is int else ""
+
 
 if __name__ == "__main__":
     """running the app"""
