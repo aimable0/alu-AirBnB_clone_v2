@@ -26,13 +26,3 @@ class City(BaseModel, Base):
     def __init__(self, *args, **kwargs):
         """Initialize a City Instance"""
         super().__init__(*args, **kwargs)
-
-        @property
-        def cities(self):
-            from models import storage
-            from models.city import City
-
-            all_cities = []
-            for obj in storage.all(City).values():
-                all_cities.append(obj)
-            return all_cities
