@@ -78,3 +78,7 @@ class FileStorage:
                 if cls.__name__ == obj.__class__.__name__
             }
         return self.__objects
+
+    def close(self):
+        """deserializing the JSON file to objects"""
+        self.reload()
