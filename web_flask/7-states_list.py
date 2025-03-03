@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""A script that runs a flask application
-and renders to browsers data from storage (file and db)
-"""
+
+"""Starts a Flask web application"""
+
 from flask import Flask, render_template
 from models import storage
 from models.state import State
@@ -17,7 +17,7 @@ def return_states():
 
 
 @app.teardown_appcontext
-def close_storage(exception=None):
+def close_storage(self):
     """Removes the current SQLAlchemy session"""
     storage.close()
 
