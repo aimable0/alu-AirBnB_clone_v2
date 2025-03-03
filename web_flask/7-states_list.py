@@ -8,19 +8,19 @@ from models.state import State
 
 app = Flask(__name__)
 
-# @app.teardown_appcontext()
-# def teardown():
-# storage.close()
-
 
 @app.route("/states_list", strict_slashes=False)
 def display_state():
-    # retrieve the list of states
-
+    """return all states objects from storage"""
     states = storage.all(State)
-    # dictionary to store state id and name as key-value pair
     return render_template("7-states_list.html", states=states)
 
 
+@app.teardown_appcontext
+def close_storage(exception=None):
+    """Removes the current SQLAlchemy session"""
+    storage.close()
+
+
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=5000)
