@@ -11,5 +11,8 @@ HBNB_TYPE_STORAGE = getenv("HBNB_TYPE_STORAGE")
 if HBNB_TYPE_STORAGE == "db":
     storage = DBStorage()
 else:
-    storage = FileStorage()
+    # storage = FileStorage()
+
+    # for test purposes lets make storage always equal to db
+    storage = DBStorage()
 storage.reload()

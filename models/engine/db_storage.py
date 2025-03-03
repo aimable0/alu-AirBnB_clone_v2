@@ -54,15 +54,18 @@ class DBStorage:
             }
             return objs_dict
         else:
-            classes = [State, Review, User, Place, City]
+            classes = [
+                State,
+                Review,
+                User,
+                Place,
+                City,
+            ]
             objs_dict = {}
             for item in classes:
                 for obj in self.__session.query(item):
                     # objs_dict[f"{obj.__class__.__name__}.{obj.id}"] = obj
-                    key = "{}.{}".format(
-                        obj.__class__.__name__,
-                        obj.id
-                    )
+                    key = "{}.{}".format(obj.__class__.__name__, obj.id)
                     objs_dict[key] = obj
             return objs_dict
 
@@ -94,10 +97,7 @@ class DBStorage:
         """create all tables in the database"""
 
         Base.metadata.create_all(bind=self.__engine)
-        session_factory = sessionmaker(
-            bind=self.__engine,
-            expire_on_commit=False
-        )
+        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
 

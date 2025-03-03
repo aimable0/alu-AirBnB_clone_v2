@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, DateTime
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 from uuid import uuid4
 from datetime import datetime
 import models
