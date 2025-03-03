@@ -45,7 +45,8 @@ class DBStorage:
         """query on the current database session"""
         if cls is not None:
             objs_dict = {
-                f"{obj.__class__.__name__}.{obj.id}": obj
+                # f"{obj.__class__.__name__}.{obj.id}": obj
+                "{}.{}".format(obj.__class__.__name__, obj.id): obj
                 for obj in self.__session.query(cls)
             }
             return objs_dict
@@ -54,7 +55,8 @@ class DBStorage:
             objs_dict = {}
             for item in classes:
                 for obj in self.__session.query(item):
-                    objs_dict[f"{obj.__class__.__name__}.{obj.id}"] = obj
+                    # objs_dict[f"{obj.__class__.__name__}.{obj.id}"] = obj
+                    objs_dict["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
             return objs_dict
 
     def new(self, obj):
@@ -85,10 +87,7 @@ class DBStorage:
         """create all tables in the database"""
 
         Base.metadata.create_all(bind=self.__engine)
-        session_factory = sessionmaker(
-            bind=self.__engine,
-            expire_on_commit=False
-        )
+        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
 

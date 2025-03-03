@@ -63,7 +63,8 @@ class FileStorage:
         """delete an object and save changes to __objects and json file"""
         if obj is not None:
             # construct the key for the object to delete
-            obj_key = f"{obj.__class__.__name__}.{obj.id}"
+            # obj_key = f"{obj.__class__.__name__}.{obj.id}"
+            obj_key = "{}.{}".format(obj.__class__.__name__, obj.id)
             # delete the obj from the __objects if it exits
             if obj_key in self.__objects:
                 del self.__objects[obj_key]
