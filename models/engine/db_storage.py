@@ -30,10 +30,13 @@ class DBStorage:
         HBNB_MYSQL_PWD = os.getenv("HBNB_MYSQL_PWD")
         HBNB_ENV = os.getenv("HBNB_ENV")
 
-        db = (
-            f"mysql+mysqldb://{HBNB_MYSQL_USER}:"
-            f"{HBNB_MYSQL_PWD}@{HBNB_MYSQL_HOST}/"
-            f"{HBNB_MYSQL_DB}"
+        # db = (
+        #     f"mysql+mysqldb://{HBNB_MYSQL_USER}:"
+        #     f"{HBNB_MYSQL_PWD}@{HBNB_MYSQL_HOST}/"
+        #     f"{HBNB_MYSQL_DB}"
+        # )
+        db = "mysql+mysqldb://{}:{}@{}/{}".format(
+            HBNB_MYSQL_USER, HBNB_MYSQL_PWD, HBNB_MYSQL_HOST, HBNB_MYSQL_DB
         )
         self.__engine = create_engine(db, pool_pre_ping=True)
 
