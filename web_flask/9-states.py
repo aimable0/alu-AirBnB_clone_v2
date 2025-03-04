@@ -2,6 +2,9 @@
 """A script that runs a flask application"""
 
 from flask import Flask
+from models import storage
+from models.city import City
+from models.state import State
 
 app = Flask(__name__)
 
