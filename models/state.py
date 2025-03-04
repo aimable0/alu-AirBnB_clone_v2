@@ -32,7 +32,7 @@ class State(BaseModel, Base):
             from models import storage
             from models.city import City
 
-            # list generation
+            # list of cities of a particular state
             citys = []
             for obj in storage.all(City).values():
                 if obj.state_id == self.id:

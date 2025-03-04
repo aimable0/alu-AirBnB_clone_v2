@@ -8,8 +8,8 @@
 <body>
     <h1>States</h1>
     <ul>
-        {% for state_id, state_info in states.items() %}
-            <li>{{ state_id.split('.')[1] }}: <b>{{ state_info['name'] }}</b></li>
+        {% for state in states.values() %}
+            <li>{{ state.id }}: <b>{{ state.name }}</b></li>
         {% endfor %}
     </ul>
 </body>
