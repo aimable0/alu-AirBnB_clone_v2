@@ -14,7 +14,12 @@ class Amenity(BaseModel, Base):
     if getenv("HBNB_TYPE_STORAGE") == "db":
         name = Column(String(128), nullable=False)
         from models.place import Place
-        place_amenities = relationship("Place", secondary=Place.place_amenity, back_populates="amenities")
+
+        place_amenities = relationship(
+            "Place", secondary=Place.place_amenity, back_populates="amenities"
+        )
     else:
         name = ""
-    
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
